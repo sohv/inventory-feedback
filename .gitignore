@@ -1,0 +1,35 @@
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+*.pot
+
+# UV package manager
+uv.lock
+
+# Python egg info
+*.egg-info/
+*.egg
+.eggs/
+dist/
+build/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE and OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.python-version
+
+# Results and plots
+src/results/*.json
+src/results/*.png

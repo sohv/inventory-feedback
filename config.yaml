@@ -1,0 +1,82 @@
+environment:
+  max_inventory: 200
+  max_order: 50
+  lead_time: 2
+  holding_cost: 1.0
+  stockout_cost: 10.0
+  ordering_cost: 2.0
+  demand_mean: 20
+  observation_delay: 2
+  noise_std: 3.0
+  censoring: true
+  episode_length: 200
+  history_length: 10
+  seasonality_amplitude: 5.0
+  seasonality_period: 52
+
+agents:
+  dqn:
+    learning_rate: 0.0001
+    buffer_size: 500000
+    learning_starts: 10000
+    batch_size: 64
+    gamma: 0.99
+    exploration_fraction: 0.15
+    exploration_final_eps: 0.02
+    target_update_interval: 30000
+    train_freq: 4
+    gradient_steps: 1
+    total_timesteps: 500000
+    policy_kwargs:
+      net_arch: [128, 128]
+
+  ppo:
+    learning_rate: 0.0003
+    n_steps: 2048
+    batch_size: 64
+    n_epochs: 10
+    gamma: 0.99
+    gae_lambda: 0.95
+    clip_range: 0.2
+    ent_coef: 0.01
+    vf_coef: 0.5
+    max_grad_norm: 0.5
+    total_timesteps: 500000
+    policy_kwargs:
+      net_arch:
+        pi: [128, 128]
+        vf: [128, 128]
+
+  recurrent_ppo:
+    learning_rate: 0.00025
+    n_steps: 2048
+    batch_size: 128
+    n_epochs: 5
+    gamma: 0.99
+    gae_lambda: 0.95
+    clip_range: 0.2
+    ent_coef: 0.01
+    vf_coef: 0.5
+    max_grad_norm: 0.5
+    total_timesteps: 1000000
+    policy_kwargs:
+      lstm_hidden_size: 128
+      n_lstm_layers: 1
+      net_arch:
+        pi: [64]
+        vf: [64]
+
+  ss_policy:
+    s: 40
+    S: 80
+
+  mpc:
+    horizon: 10
+
+experiment:
+  num_eval_episodes: 50
+  num_seeds: 3
+  seed: 42
+  delay_levels: [0, 1, 2, 4, 8]
+  noise_levels: [0.0, 1.0, 3.0, 5.0, 10.0]
+  censoring_levels: [false, true]

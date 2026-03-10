@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inventory-feedback"
+version = "0.1.0"
+description = "Inventory Management under Delayed & Noisy Demand Feedback using RL"
+requires-python = ">=3.10"
+dependencies = [
+    "gymnasium",
+    "stable-baselines3",
+    "sb3-contrib",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "pyyaml",
+    "scipy",
+    "torch",
+    "seaborn",
+]
+
+[tool.setuptools.packages.find]
+include = ["src*"]
