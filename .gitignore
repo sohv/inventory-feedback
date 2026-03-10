@@ -29,7 +29,3 @@ __pycache__/
 *~
 .DS_Store
 .python-version
-
-# Results and plots
-src/results/*.json
-src/results/*.png

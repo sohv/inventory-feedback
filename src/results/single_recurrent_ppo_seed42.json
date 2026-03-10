@@ -1,0 +1,14 @@
+{
+  "agent": "recurrent_ppo",
+  "seed": 42,
+  "metrics": {
+    "mean_cost": 36257.26,
+    "std_cost": 554.1963482376981,
+    "mean_reward": -36257.26,
+    "std_reward": 554.1963482376981,
+    "mean_service_level": 0.12337265826264054,
+    "std_service_level": 0.0017225916896242293,
+    "mean_stockout_steps": 195.48,
+    "stockout_rate": 0.9773999999999999
+  }
+}
