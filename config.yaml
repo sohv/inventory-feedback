@@ -26,7 +26,7 @@ agents:
     target_update_interval: 30000
     train_freq: 4
     gradient_steps: 1
-    total_timesteps: 500000
+    total_timesteps: 150000
     policy_kwargs:
       net_arch: [128, 128]
 
@@ -41,7 +41,7 @@ agents:
     ent_coef: 0.01
     vf_coef: 0.5
     max_grad_norm: 0.5
-    total_timesteps: 500000
+    total_timesteps: 150000
     policy_kwargs:
       net_arch:
         pi: [128, 128]
@@ -58,7 +58,7 @@ agents:
     ent_coef: 0.01
     vf_coef: 0.5
     max_grad_norm: 0.5
-    total_timesteps: 1000000
+    total_timesteps: 250000
     policy_kwargs:
       lstm_hidden_size: 128
       n_lstm_layers: 1

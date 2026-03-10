@@ -418,6 +418,57 @@ def plot_pomdp_advantage():
     plt.close(fig)
 
 
+def plot_training_curves():
+    """Plot training curves (rewards/costs vs timesteps) for RL agents."""
+    import glob
+    
+    log_files = sorted(glob.glob(str(RESULTS_DIR / "train_logs_*.json")))
+    
+    if not log_files:
+        print("No training logs found. Run experiments first with --agent {dqn,ppo,recurrent_ppo}")
+        return
+    
+    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    
+    for log_file in log_files:
+        with open(log_file) as f:
+            data = json.load(f)
+        
+        # Extract agent and seed from filename
+        filename = Path(log_file).stem
+        parts = filename.split("_")
+        agent = "_".join(parts[2:-1])  # e.g., "recurrent_ppo"
+        seed = parts[-1]
+        
+        timesteps = data.get("timesteps", [])
+        rewards = data.get("episode_rewards", [])
+        
+        if timesteps and rewards:
+            # Plot on first subplot
+            axes[0].plot(
+                timesteps,
+                rewards,
+                label=f"{AGENT_LABELS.get(agent, agent)} (seed {seed})",
+                color=AGENT_COLORS.get(agent, "#95a5a6"),
+                alpha=0.7,
+            )
+    
+    axes[0].set_xlabel("Timesteps", fontsize=12)
+    axes[0].set_ylabel("Mean Episode Reward", fontsize=12)
+    axes[0].set_title("Training Progress: Episode Rewards", fontsize=13)
+    axes[0].legend(fontsize=9)
+    axes[0].grid(True, alpha=0.3)
+    
+    # Hide unused subplots
+    axes[1].axis('off')
+    axes[2].axis('off')
+    
+    plt.tight_layout()
+    fig.savefig(RESULTS_DIR / "training_curves.png", dpi=150, bbox_inches="tight")
+    print("Saved training_curves.png")
+    plt.close(fig)
+
+
 def plot_summary_table():
     """Generate a text-based summary table of all results."""
     delay_data = load_results("delay_sweep.json")["results"]
@@ -470,6 +521,8 @@ def generate_all_plots():
         plot_robustness_heatmap()
         plot_pomdp_advantage()
 
+    plot_training_curves()
+
     print(f"\nAll plots saved to {RESULTS_DIR}/")
 
 
@@ -485,6 +538,7 @@ def main():
             "comparison",
             "heatmap",
             "advantage",
+            "training",
         ],
         default="all",
         help="Which plot to generate",
@@ -507,6 +561,8 @@ def main():
         plot_robustness_heatmap()
     elif args.plot == "advantage":
         plot_pomdp_advantage()
+    elif args.plot == "training":
+        plot_training_curves()
 
 
 if __name__ == "__main__":

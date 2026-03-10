@@ -4,7 +4,7 @@ from pathlib import Path
 from stable_baselines3 import DQN
 from stable_baselines3.common.vec_env import DummyVecEnv
 
-from src.agents.base import BaseAgent
+from src.agents.base import BaseAgent, TrainingLogger
 from src.environment import InventoryEnv
 
 
@@ -18,7 +18,7 @@ class DQNAgent(BaseAgent):
         self.env_config = env_config
         self.model = None
 
-    def train(self, env, total_timesteps: int = None, seed: int = 42):
+    def train(self, env, total_timesteps: int = None, seed: int = 42, callback=None):
         if total_timesteps is None:
             total_timesteps = self.agent_config.get("total_timesteps", 500000)
 
@@ -50,7 +50,7 @@ class DQNAgent(BaseAgent):
             verbose=0,
         )
 
-        self.model.learn(total_timesteps=total_timesteps)
+        self.model.learn(total_timesteps=total_timesteps, callback=callback)
         vec_env.close()
 
     def predict(self, obs, state=None, episode_start=None, deterministic=True):
