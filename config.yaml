@@ -49,22 +49,22 @@ agents:
 
   recurrent_ppo:
     learning_rate: 0.0008
-    n_steps: 4096
-    batch_size: 128
-    n_epochs: 15
+    n_steps: 2048
+    batch_size: 64
+    n_epochs: 5
     gamma: 0.99
     gae_lambda: 0.95
     clip_range: 0.2
     ent_coef: 0.05
     vf_coef: 0.75
     max_grad_norm: 0.5
-    total_timesteps: 500000
+    total_timesteps: 100000
     policy_kwargs:
-      lstm_hidden_size: 256
-      n_lstm_layers: 2
+      lstm_hidden_size: 128
+      n_lstm_layers: 1
       net_arch:
-        pi: [256]
-        vf: [256]
+        pi: [128]
+        vf: [128]
 
   ss_policy:
     s: 40
