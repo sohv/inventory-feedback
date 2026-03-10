@@ -19,6 +19,7 @@ dependencies = [
     "torch",
     "seaborn",
     "wandb",
+    "sb3-contrib",
 ]
 
 [tool.setuptools.packages.find]

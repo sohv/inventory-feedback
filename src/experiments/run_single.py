@@ -4,6 +4,8 @@ import time
 
 from src.agents import (
     DQNAgent,
+    QRDQNAgent,
+    A2CAgent,
     MPCAgent,
     PPOAgent,
     RecurrentPPOAgent,
@@ -16,6 +18,8 @@ AGENT_MAP = {
     "ss_policy": SSPolicy,
     "mpc": MPCAgent,
     "dqn": DQNAgent,
+    "qrdqn": QRDQNAgent,
+    "a2c": A2CAgent,
     "ppo": PPOAgent,
     "recurrent_ppo": RecurrentPPOAgent,
 }
@@ -52,7 +56,7 @@ def main():
     agent_cls = AGENT_MAP[args.agent]
     agent = agent_cls(agent_config, env_config)
 
-    if args.agent in {"dqn", "ppo", "recurrent_ppo"}:
+    if args.agent in {"dqn", "qrdqn", "a2c", "ppo", "recurrent_ppo"}:
         timesteps = args.timesteps or agent_config.get("total_timesteps", 500000)
         print(f"Training for {timesteps} timesteps...")
         t0 = time.time()
@@ -73,7 +77,7 @@ def main():
 
     save_results(
         {"agent": args.agent, "seed": args.seed, "metrics": metrics},
-        f"single_{args.agent}_seed{args.seed}.json",
+        f"single_{args.agent}_seed{args.seed}_{timesteps}.json",
     )
 
 

@@ -1,0 +1,14 @@
+{
+  "agent": "ppo",
+  "seed": 42,
+  "metrics": {
+    "mean_cost": 12129.44,
+    "std_cost": 287.7095869101341,
+    "mean_reward": -12129.44,
+    "std_reward": 287.7095869101341,
+    "mean_service_level": 0.9413419526829152,
+    "std_service_level": 0.00784978726472913,
+    "mean_stockout_steps": 44.7,
+    "stockout_rate": 0.2235
+  }
+}

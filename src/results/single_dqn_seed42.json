@@ -1,0 +1,14 @@
+{
+  "agent": "dqn",
+  "seed": 42,
+  "metrics": {
+    "mean_cost": 11951.32,
+    "std_cost": 246.48549166228833,
+    "mean_reward": -11951.32,
+    "std_reward": 246.48549166228833,
+    "mean_service_level": 0.9568967034865853,
+    "std_service_level": 0.006912191881568432,
+    "mean_stockout_steps": 26.78,
+    "stockout_rate": 0.13390000000000002
+  }
+}

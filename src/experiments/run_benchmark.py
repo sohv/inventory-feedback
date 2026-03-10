@@ -6,6 +6,8 @@ import numpy as np
 
 from src.agents import (
     DQNAgent,
+    QRDQNAgent,
+    A2CAgent,
     MPCAgent,
     PPOAgent,
     RecurrentPPOAgent,
@@ -24,11 +26,13 @@ AGENT_CLASSES = {
     "ss_policy": SSPolicy,
     "mpc": MPCAgent,
     "dqn": DQNAgent,
+    "qrdqn": QRDQNAgent,
+    "a2c": A2CAgent,
     "ppo": PPOAgent,
     "recurrent_ppo": RecurrentPPOAgent,
 }
 
-RL_AGENTS = {"dqn", "ppo", "recurrent_ppo"}
+RL_AGENTS = {"dqn", "qrdqn", "a2c", "ppo", "recurrent_ppo"}
 
 
 def build_agent(agent_name: str, agent_config: dict, env_config: dict):
@@ -60,7 +64,7 @@ def run_single_config(
             f"Stockout rate: {metrics['stockout_rate']:.3f}"
         )
 
-    for agent_name in ["dqn", "ppo", "recurrent_ppo"]:
+    for agent_name in ["dqn", "qrdqn", "a2c", "ppo", "recurrent_ppo"]:
         seed_results = []
         for s in range(num_seeds):
             seed = base_seed + s * 100
@@ -99,6 +103,8 @@ def run_delay_sweep(config: dict):
     agents_config = config["agents"]
     exp_config = config["experiment"]
     delay_levels = exp_config.get("delay_levels", [0, 1, 2, 4, 8])
+    num_seeds = exp_config.get("num_seeds", 3)
+    num_eval = exp_config.get("num_eval_episodes", 50)
 
     all_results = {}
     for delay in delay_levels:
@@ -111,7 +117,7 @@ def run_delay_sweep(config: dict):
             env_config, agents_config, exp_config, label
         )
 
-    save_results({"experiment": "delay_sweep", "results": all_results}, "delay_sweep.json")
+    save_results({"experiment": "delay_sweep", "results": all_results}, f"delay_sweep_seeds{num_seeds}_eval{num_eval}.json")
     return all_results
 
 
@@ -121,6 +127,8 @@ def run_noise_sweep(config: dict):
     agents_config = config["agents"]
     exp_config = config["experiment"]
     noise_levels = exp_config.get("noise_levels", [0.0, 1.0, 3.0, 5.0, 10.0])
+    num_seeds = exp_config.get("num_seeds", 3)
+    num_eval = exp_config.get("num_eval_episodes", 50)
 
     all_results = {}
     for noise in noise_levels:
@@ -133,7 +141,7 @@ def run_noise_sweep(config: dict):
             env_config, agents_config, exp_config, label
         )
 
-    save_results({"experiment": "noise_sweep", "results": all_results}, "noise_sweep.json")
+    save_results({"experiment": "noise_sweep", "results": all_results}, f"noise_sweep_seeds{num_seeds}_eval{num_eval}.json")
     return all_results
 
 
@@ -142,6 +150,8 @@ def run_censoring_comparison(config: dict):
     env_base = config["environment"]
     agents_config = config["agents"]
     exp_config = config["experiment"]
+    num_seeds = exp_config.get("num_seeds", 3)
+    num_eval = exp_config.get("num_eval_episodes", 50)
 
     all_results = {}
     for censor in [False, True]:
@@ -156,7 +166,7 @@ def run_censoring_comparison(config: dict):
 
     save_results(
         {"experiment": "censoring_comparison", "results": all_results},
-        "censoring_comparison.json",
+        f"censoring_comparison_seeds{num_seeds}_eval{num_eval}.json",
     )
     return all_results
 
