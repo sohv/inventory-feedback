@@ -11,7 +11,6 @@ from src.agents import (
     RecurrentPPOAgent,
     SSPolicy,
 )
-from src.agents.base import TrainingLogger
 from src.environment import InventoryEnv
 from src.utils import (
     evaluate_agent,
@@ -69,17 +68,10 @@ def run_single_config(
             t0 = time.time()
 
             agent = build_agent(agent_name, agents_config[agent_name], env_config)
-            
-            # Setup training logger
-            logger = TrainingLogger(log_freq=1000)
-            agent.train(None, seed=seed, callback=logger)
-            
-            # Save training logs with config label
-            log_filename = f"train_logs_{config_label}_{agent_name}_seed{seed}.json"
-            logger.save_logs(f"src/results/{log_filename}")
+            agent.train(None, seed=seed)
             
             dt = time.time() - t0
-            print(f"    Training done in {dt:.1f}s (logs saved to {log_filename})")
+            print(f"    Training done in {dt:.1f}s")
 
             metrics = evaluate_agent(
                 agent, env_config, num_episodes=num_eval, seed=base_seed + 5000

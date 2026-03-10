@@ -9,7 +9,6 @@ from src.agents import (
     RecurrentPPOAgent,
     SSPolicy,
 )
-from src.agents.base import TrainingLogger
 from src.environment import InventoryEnv
 from src.utils import evaluate_agent, load_config, save_results, set_seed
 
@@ -58,16 +57,7 @@ def main():
         print(f"Training for {timesteps} timesteps...")
         t0 = time.time()
         env = InventoryEnv(env_config)
-        
-        # Setup training logger
-        logger = TrainingLogger(log_freq=1000)
-        agent.train(env, total_timesteps=timesteps, seed=args.seed, callback=logger)
-        
-        # Save training logs
-        log_filename = f"train_logs_{args.agent}_seed{args.seed}.json"
-        logger.save_logs(f"src/results/{log_filename}")
-        print(f"Saved training logs to {log_filename}")
-        
+        agent.train(env, total_timesteps=timesteps, seed=args.seed)
         print(f"Training completed in {time.time() - t0:.1f}s")
 
     print(f"\nEvaluating over {args.eval_episodes} episodes...")

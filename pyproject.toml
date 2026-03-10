@@ -18,6 +18,7 @@ dependencies = [
     "scipy",
     "torch",
     "seaborn",
+    "wandb",
 ]
 
 [tool.setuptools.packages.find]

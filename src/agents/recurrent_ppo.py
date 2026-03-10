@@ -5,7 +5,7 @@ import numpy as np
 from sb3_contrib import RecurrentPPO
 from stable_baselines3.common.vec_env import DummyVecEnv
 
-from src.agents.base import BaseAgent, TrainingLogger
+from src.agents.base import BaseAgent
 from src.environment import InventoryEnv
 
 
@@ -24,7 +24,7 @@ class RecurrentPPOAgent(BaseAgent):
         self.env_config = env_config
         self.model = None
 
-    def train(self, env, total_timesteps: int = None, seed: int = 42, callback=None):
+    def train(self, env, total_timesteps: int = None, seed: int = 42):
         if total_timesteps is None:
             total_timesteps = self.agent_config.get("total_timesteps", 500000)
 
@@ -58,7 +58,7 @@ class RecurrentPPOAgent(BaseAgent):
             verbose=0,
         )
 
-        self.model.learn(total_timesteps=total_timesteps, callback=callback)
+        self.model.learn(total_timesteps=total_timesteps)
         vec_env.close()
 
     def predict(self, obs, state=None, episode_start=None, deterministic=True):
