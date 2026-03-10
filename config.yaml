@@ -89,8 +89,8 @@ agents:
     max_grad_norm: 0.5
     total_timesteps: 500000
     policy_kwargs:
-      lstm_hidden_size: 256
-      n_lstm_layers: 2
+      lstm_hidden_size: 128
+      n_lstm_layers: 1
       net_arch:
         pi: [256]
         vf: [256]
