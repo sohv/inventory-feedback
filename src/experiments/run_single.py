@@ -6,6 +6,8 @@ from src.agents import (
     DQNAgent,
     QRDQNAgent,
     A2CAgent,
+    TRPOAgent,
+    ARSAgent,
     MPCAgent,
     PPOAgent,
     RecurrentPPOAgent,
@@ -20,6 +22,8 @@ AGENT_MAP = {
     "dqn": DQNAgent,
     "qrdqn": QRDQNAgent,
     "a2c": A2CAgent,
+    "trpo": TRPOAgent,
+    "ars": ARSAgent,
     "ppo": PPOAgent,
     "recurrent_ppo": RecurrentPPOAgent,
 }
@@ -56,7 +60,7 @@ def main():
     agent_cls = AGENT_MAP[args.agent]
     agent = agent_cls(agent_config, env_config)
 
-    if args.agent in {"dqn", "qrdqn", "a2c", "ppo", "recurrent_ppo"}:
+    if args.agent in {"dqn", "qrdqn", "a2c", "trpo", "ars", "ppo", "recurrent_ppo"}:
         timesteps = args.timesteps or agent_config.get("total_timesteps", 500000)
         print(f"Training for {timesteps} timesteps...")
         t0 = time.time()

@@ -1,0 +1,14 @@
+{
+  "agent": "qrdqn",
+  "seed": 42,
+  "metrics": {
+    "mean_cost": 11967.52,
+    "std_cost": 203.8949965055543,
+    "mean_reward": -11967.52,
+    "std_reward": 203.8949965055543,
+    "mean_service_level": 0.9766045175472332,
+    "std_service_level": 0.00513893934288491,
+    "mean_stockout_steps": 19.4,
+    "stockout_rate": 0.09699999999999999
+  }
+}

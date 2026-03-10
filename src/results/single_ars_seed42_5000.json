@@ -1,0 +1,14 @@
+{
+  "agent": "ars",
+  "seed": 42,
+  "metrics": {
+    "mean_cost": 20588.92,
+    "std_cost": 550.2646577784185,
+    "mean_reward": -20588.92,
+    "std_reward": 550.2646577784185,
+    "mean_service_level": 0.6157986371753351,
+    "std_service_level": 0.008596333956514319,
+    "mean_stockout_steps": 173.3,
+    "stockout_rate": 0.8665
+  }
+}

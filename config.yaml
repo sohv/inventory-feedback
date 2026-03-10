@@ -59,6 +59,26 @@ agents:
         pi: [256, 256]
         vf: [256, 256]
 
+  trpo:
+    learning_rate: 0.001
+    n_steps: 2048
+    batch_size: 128
+    gamma: 0.99
+    gae_lambda: 0.98
+    cg_max_steps: 15
+    total_timesteps: 500000
+    policy_kwargs:
+      net_arch: [256, 256]
+
+  ars:
+    learning_rate: 0.03
+    n_delta: 16
+    n_top: 6
+    delta_std: 0.02
+    total_timesteps: 500000
+    policy_kwargs:
+      net_arch: [256, 256]
+
   ppo:
     learning_rate: 0.0008
     n_steps: 4096

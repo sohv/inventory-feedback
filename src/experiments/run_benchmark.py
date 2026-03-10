@@ -8,6 +8,8 @@ from src.agents import (
     DQNAgent,
     QRDQNAgent,
     A2CAgent,
+    TRPOAgent,
+    ARSAgent,
     MPCAgent,
     PPOAgent,
     RecurrentPPOAgent,
@@ -28,11 +30,13 @@ AGENT_CLASSES = {
     "dqn": DQNAgent,
     "qrdqn": QRDQNAgent,
     "a2c": A2CAgent,
+    "trpo": TRPOAgent,
+    "ars": ARSAgent,
     "ppo": PPOAgent,
     "recurrent_ppo": RecurrentPPOAgent,
 }
 
-RL_AGENTS = {"dqn", "qrdqn", "a2c", "ppo", "recurrent_ppo"}
+RL_AGENTS = {"dqn", "qrdqn", "a2c", "trpo", "ars", "ppo", "recurrent_ppo"}
 
 
 def build_agent(agent_name: str, agent_config: dict, env_config: dict):
@@ -64,7 +68,7 @@ def run_single_config(
             f"Stockout rate: {metrics['stockout_rate']:.3f}"
         )
 
-    for agent_name in ["dqn", "qrdqn", "a2c", "ppo", "recurrent_ppo"]:
+    for agent_name in ["dqn", "qrdqn", "a2c", "trpo", "ars", "ppo", "recurrent_ppo"]:
         seed_results = []
         for s in range(num_seeds):
             seed = base_seed + s * 100

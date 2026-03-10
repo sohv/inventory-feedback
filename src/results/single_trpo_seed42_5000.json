@@ -1,0 +1,14 @@
+{
+  "agent": "trpo",
+  "seed": 42,
+  "metrics": {
+    "mean_cost": 36470.76,
+    "std_cost": 768.6343099289805,
+    "mean_reward": -36470.76,
+    "std_reward": 768.6343099289805,
+    "mean_service_level": 0.11786472364652104,
+    "std_service_level": 0.01986266914566129,
+    "mean_stockout_steps": 189.76,
+    "stockout_rate": 0.9488
+  }
+}
